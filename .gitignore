@@ -44,3 +44,6 @@ refactor_*.py
 
 # === Gemini Agent ===
 .gemini/
+
+# === Package Manager Lock Files ===
+uv.lock
