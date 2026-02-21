@@ -11,7 +11,14 @@ from __future__ import annotations
 import asyncio
 import atexit
 from collections.abc import Callable
-from importlib.metadata import version
+from importlib.metadata import version as _original_version, PackageNotFoundError
+
+def version(pkg_name):
+    """Safe version lookup — returns fallback if package isn't pip-installed."""
+    try:
+        return _original_version(pkg_name)
+    except PackageNotFoundError:
+        return "1.9.3"
 import json
 import logging
 import os
