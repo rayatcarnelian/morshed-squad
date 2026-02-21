@@ -1,0 +1,46 @@
+# === Python ===
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+eggs/
+*.egg
+
+# === Environment ===
+.env
+.env.local
+.env.*.local
+*.env
+
+# === Database (User Data - Never Push) ===
+*.db
+*.sqlite
+*.sqlite3
+morshed_squad.db
+
+# === IDE ===
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# === OS ===
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# === Streamlit ===
+.streamlit/secrets.toml
+
+# === Test / Temp ===
+test_*.py
+fix_*.py
+refactor_*.py
+*.log
+
+# === Gemini Agent ===
+.gemini/

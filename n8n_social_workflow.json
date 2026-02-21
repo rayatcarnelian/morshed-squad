@@ -1,0 +1,290 @@
+{
+  "name": "Morshed Squad - Multi-Platform Engine",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "morshed-squad-social",
+        "responseMode": "lastNode",
+        "options": {}
+      },
+      "id": "e492b429-1d90-410a-bda0-80252b47f081",
+      "name": "Morshed Squad Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        250,
+        300
+      ],
+      "webhookId": "morshed-squad-social"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.body.platforms.join(',')}}",
+              "operation": "contains",
+              "value2": "Twitter/X"
+            }
+          ]
+        }
+      },
+      "id": "c9284cf6-32d2-4328-98e6-12ffdfced96e",
+      "name": "Check Twitter",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        500,
+        100
+      ]
+    },
+    {
+      "parameters": {
+        "text": "={{$json.body.content}}"
+      },
+      "id": "f8a00fc2-9a3b-41da-ab7e-fa26f6eb8bfa",
+      "name": "Twitter / X",
+      "type": "n8n-nodes-base.twitter",
+      "typeVersion": 1,
+      "position": [
+        750,
+        80
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.body.platforms.join(',')}}",
+              "operation": "contains",
+              "value2": "LinkedIn"
+            }
+          ]
+        }
+      },
+      "id": "bd29a759-467a-4fa3-9e4a-9391bcade4cd",
+      "name": "Check LinkedIn",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        500,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "text": "={{$json.body.content}}"
+      },
+      "id": "1cde7766-419f-4329-8473-b26a11702eac",
+      "name": "LinkedIn",
+      "type": "n8n-nodes-base.linkedIn",
+      "typeVersion": 1,
+      "position": [
+        750,
+        280
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.body.platforms.join(',')}}",
+              "operation": "contains",
+              "value2": "Facebook"
+            }
+          ]
+        }
+      },
+      "id": "92fbf15a-4e2a-4c28-9dcb-df0a256a282f",
+      "name": "Check Facebook",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        500,
+        500
+      ]
+    },
+    {
+      "parameters": {
+        "pageId": "",
+        "text": "={{$json.body.content}}"
+      },
+      "id": "173f4e24-4f0e-4dd8-83b6-ad7beebd01a5",
+      "name": "Facebook Pages",
+      "type": "n8n-nodes-base.facebookGraphApi",
+      "typeVersion": 1,
+      "position": [
+        750,
+        480
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.body.platforms.join(',')}}",
+              "operation": "contains",
+              "value2": "Instagram"
+            }
+          ]
+        }
+      },
+      "id": "a9a3b680-e83d-4c54-9964-672ce3462fe8",
+      "name": "Check Instagram",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        500,
+        700
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "caption": "={{$json.body.content}}",
+        "imageUrl": "https://example.com/placeholder.jpg"
+      },
+      "id": "fc567d26-b9b5-4b15-9c59-d3e3cd90f7d5",
+      "name": "Instagram for Business",
+      "type": "n8n-nodes-base.instagramBusiness",
+      "typeVersion": 2,
+      "position": [
+        750,
+        680
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{$json.body.platforms.join(',')}}",
+              "operation": "contains",
+              "value2": "YouTube"
+            }
+          ]
+        }
+      },
+      "id": "d0e1b206-2182-4f36-9b55-d14efcde84c9",
+      "name": "Check YouTube",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        500,
+        900
+      ]
+    },
+    {
+      "parameters": {
+        "resource": "channel",
+        "operation": "update",
+        "channelId": "",
+        "title": "={{$json.body.topic}}",
+        "description": "={{$json.body.content}}"
+      },
+      "id": "e44d34f0-ecb6-455b-b9ab-5f21ee880a6b",
+      "name": "YouTube",
+      "type": "n8n-nodes-base.youTube",
+      "typeVersion": 1,
+      "position": [
+        750,
+        880
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Morshed Squad Webhook": {
+      "main": [
+        [
+          {
+            "node": "Check Twitter",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Check LinkedIn",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Check Facebook",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Check Instagram",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Check YouTube",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Twitter": {
+      "main": [
+        [
+          {
+            "node": "Twitter / X",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check LinkedIn": {
+      "main": [
+        [
+          {
+            "node": "LinkedIn",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Facebook": {
+      "main": [
+        [
+          {
+            "node": "Facebook Pages",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Instagram": {
+      "main": [
+        [
+          {
+            "node": "Instagram for Business",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check YouTube": {
+      "main": [
+        [
+          {
+            "node": "YouTube",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {}
+}

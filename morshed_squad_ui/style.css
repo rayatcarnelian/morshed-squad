@@ -1,0 +1,131 @@
+:root {
+    --bg-color: #FAFAFA;
+    --sidebar-bg: #F0F2F6;
+    --text-color: #31333F;
+    --header-color: #000000;
+    --brand-red: #FF4B4B;
+    --brand-hover: #FF3333;
+    --card-bg: #FFFFFF;
+    --border-color: #E0E0E0;
+    --metric-label: #666;
+    --input-bg: #FFFFFF;
+}
+
+[data-theme="dark"] {
+    --bg-color: #0E1117;
+    --sidebar-bg: #262730;
+    --text-color: #FAFAFA;
+    --header-color: #FFFFFF;
+    --brand-red: #FF4B4B;
+    --brand-hover: #FF3333;
+    --card-bg: #1E1E1E;
+    --border-color: #333333;
+    --metric-label: #AAA;
+    --input-bg: #262730;
+}
+
+/* Main Background and Text Color */
+[data-testid="stAppViewContainer"] {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+/* Sidebar Styling */
+[data-testid="stSidebar"] {
+    background-color: var(--sidebar-bg);
+    border-right: 1px solid var(--border-color);
+}
+
+[data-testid="stSidebar"] h2 {
+    color: var(--brand-red);
+    font-weight: 700;
+}
+
+/* Titles and Headers */
+h1,
+h2,
+h3 {
+    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
+    color: var(--header-color);
+    font-weight: 600;
+}
+
+/* Buttons */
+.stButton>button {
+    background-color: var(--brand-red);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.2s;
+}
+
+.stButton>button:hover {
+    background-color: var(--brand-hover);
+    border-color: var(--brand-hover);
+    color: white;
+}
+
+/* Secondary Buttons (Outlined) */
+button[kind="secondary"] {
+    background-color: transparent;
+    border: 1px solid var(--brand-red);
+    color: var(--brand-red);
+}
+
+/* Metrics and Cards */
+[data-testid="stMetric"] {
+    background-color: var(--card-bg);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+[data-testid="stMetricLabel"] {
+    color: var(--metric-label);
+    font-size: 0.9rem;
+}
+
+[data-testid="stMetricValue"] {
+    color: var(--text-color);
+    font-weight: 700;
+}
+
+/* Dataframe/Table Styling */
+[data-testid="stDataFrame"] {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* Inputs */
+.stTextInput>div>div>input,
+.stTextArea>div>div>textarea,
+.stSelectbox>div>div>div {
+    background-color: var(--input-bg) !important;
+    color: var(--text-color) !important;
+    border: 1px solid var(--border-color) !important;
+    border-radius: 4px;
+}
+
+/* Status Messages */
+.stAlert {
+    border-radius: 4px;
+}
+
+/* Expander */
+.streamlit-expanderHeader {
+    background-color: var(--card-bg);
+    border-radius: 4px;
+    color: var(--text-color);
+}
+
+/* Custom Guideline Card */
+.guideline-card {
+    background-color: var(--card-bg);
+    padding: 20px;
+    border-radius: 12px;
+    border-left: 5px solid var(--brand-red);
+    margin-bottom: 20px;
+}
