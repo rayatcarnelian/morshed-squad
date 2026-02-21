@@ -26,13 +26,19 @@ try:
         os.path.join(lib_dir, 'morshed_squad', 'src', 'morshed_squad', 'database', 'database_manager.py'))
     DatabaseManager = _db_mod.DatabaseManager
 
-    _tel_mod = _load_module_from_file("telephony_manager",
-        os.path.join(lib_dir, 'morshed_squad', 'src', 'morshed_squad', 'telephony', 'telephony_manager.py'))
-    TelephonyManager = _tel_mod.TelephonyManager
+    try:
+        _tel_mod = _load_module_from_file("telephony_manager",
+            os.path.join(lib_dir, 'morshed_squad', 'src', 'morshed_squad', 'telephony', 'telephony_manager.py'))
+        TelephonyManager = _tel_mod.TelephonyManager
+    except Exception:
+        TelephonyManager = None
 
-    _ap_mod = _load_module_from_file("auto_pilot",
-        os.path.join(lib_dir, 'morshed_squad', 'src', 'morshed_squad', 'core', 'auto_pilot.py'))
-    AutoPilotWorker = _ap_mod.AutoPilotWorker
+    try:
+        _ap_mod = _load_module_from_file("auto_pilot",
+            os.path.join(lib_dir, 'morshed_squad', 'src', 'morshed_squad', 'core', 'auto_pilot.py'))
+        AutoPilotWorker = _ap_mod.AutoPilotWorker
+    except Exception:
+        AutoPilotWorker = None
 
     _ws_mod = _load_module_from_file("web_search_tool",
         os.path.join(lib_dir, 'morshed_squad_tools', 'src', 'morshed_squad_tools', 'tools', 'web_search_tool.py'))
