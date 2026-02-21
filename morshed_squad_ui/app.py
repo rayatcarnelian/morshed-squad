@@ -11,39 +11,54 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.dirname(current_dir)
 lib_dir = os.path.join(root_dir, 'lib')
 
-sys.path.append(os.path.join(lib_dir, 'morshed_squad', 'src'))
-sys.path.append(os.path.join(lib_dir, 'morshed_squad_tools', 'src'))
-sys.path.append(os.path.join(lib_dir, 'morshed_squad_files', 'src'))
-
 import importlib
+import importlib.util
+
+def _load_module_from_file(module_name, file_path):
+    """Load a Python module directly from file, bypassing __init__.py chains."""
+    spec = importlib.util.spec_from_file_location(module_name, file_path)
+    mod = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(mod)
+    return mod
 
 try:
-    from morshed_squad.database import database_manager
-    from morshed_squad.telephony import telephony_manager
-    from morshed_squad.core import auto_pilot
-    from morshed_squad_tools.tools import web_search_tool, email_tool, social_content_tool, memory_tool
-    
-    importlib.reload(database_manager)
-    importlib.reload(telephony_manager)
-    importlib.reload(auto_pilot)
-    importlib.reload(web_search_tool)
-    importlib.reload(email_tool)
-    importlib.reload(social_content_tool)
-    importlib.reload(memory_tool)
-    
-    from morshed_squad.database.database_manager import DatabaseManager
-    from morshed_squad.telephony.telephony_manager import TelephonyManager
-    from morshed_squad.core.auto_pilot import AutoPilotWorker
-    from morshed_squad_tools.tools.web_search_tool import MorshedWebSearchTool
-    from morshed_squad_tools.tools.email_tool import MorshedEmailTool
-    from morshed_squad_tools.tools.social_content_tool import MorshedSocialContentTool
-    from morshed_squad_tools.tools.memory_tool import MorshedMemoryStoreTool, MorshedMemoryRecallTool
+    _db_mod = _load_module_from_file("database_manager",
+        os.path.join(lib_dir, 'morshed_squad', 'src', 'morshed_squad', 'database', 'database_manager.py'))
+    DatabaseManager = _db_mod.DatabaseManager
+
+    _tel_mod = _load_module_from_file("telephony_manager",
+        os.path.join(lib_dir, 'morshed_squad', 'src', 'morshed_squad', 'telephony', 'telephony_manager.py'))
+    TelephonyManager = _tel_mod.TelephonyManager
+
+    _ap_mod = _load_module_from_file("auto_pilot",
+        os.path.join(lib_dir, 'morshed_squad', 'src', 'morshed_squad', 'core', 'auto_pilot.py'))
+    AutoPilotWorker = _ap_mod.AutoPilotWorker
+
+    _ws_mod = _load_module_from_file("web_search_tool",
+        os.path.join(lib_dir, 'morshed_squad_tools', 'src', 'morshed_squad_tools', 'tools', 'web_search_tool.py'))
+    MorshedWebSearchTool = _ws_mod.MorshedWebSearchTool
+
+    _em_mod = _load_module_from_file("email_tool",
+        os.path.join(lib_dir, 'morshed_squad_tools', 'src', 'morshed_squad_tools', 'tools', 'email_tool.py'))
+    MorshedEmailTool = _em_mod.MorshedEmailTool
+
+    _sc_mod = _load_module_from_file("social_content_tool",
+        os.path.join(lib_dir, 'morshed_squad_tools', 'src', 'morshed_squad_tools', 'tools', 'social_content_tool.py'))
+    MorshedSocialContentTool = _sc_mod.MorshedSocialContentTool
+
+    _mm_mod = _load_module_from_file("memory_tool",
+        os.path.join(lib_dir, 'morshed_squad_tools', 'src', 'morshed_squad_tools', 'tools', 'memory_tool.py'))
+    MorshedMemoryStoreTool = _mm_mod.MorshedMemoryStoreTool
+    MorshedMemoryRecallTool = _mm_mod.MorshedMemoryRecallTool
 except Exception as e:
     DatabaseManager = None
     TelephonyManager = None
     AutoPilotWorker = None
     MorshedWebSearchTool = None
     MorshedEmailTool = None
+    MorshedSocialContentTool = None
+    MorshedMemoryStoreTool = None
+    MorshedMemoryRecallTool = None
     st.error(f"Error importing internal modules: {e}")
     st.stop()
 
