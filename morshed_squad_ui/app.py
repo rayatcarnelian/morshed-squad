@@ -11,6 +11,11 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 root_dir = os.path.dirname(current_dir)
 lib_dir = os.path.join(root_dir, 'lib')
 
+# Add source paths so internal cross-imports within packages work
+sys.path.insert(0, os.path.join(lib_dir, 'morshed_squad', 'src'))
+sys.path.insert(0, os.path.join(lib_dir, 'morshed_squad_tools', 'src'))
+sys.path.insert(0, os.path.join(lib_dir, 'morshed_squad_files', 'src'))
+
 import importlib
 import importlib.util
 
