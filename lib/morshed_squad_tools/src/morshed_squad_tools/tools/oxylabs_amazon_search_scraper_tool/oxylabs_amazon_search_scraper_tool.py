@@ -101,7 +101,7 @@ class OxylabsAmazonSearchScraperTool(BaseTool):
         bits, _ = architecture()
         sdk_type = (
             f"oxylabs-crewai-sdk-python/"
-            f"{version("morshed_squad")} "
+            f"1.9.3 "
             f"({python_version()}; {bits})"
         )
 
