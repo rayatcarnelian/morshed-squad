@@ -142,33 +142,6 @@ try:
 except FileNotFoundError:
     pass
 
-# Dark Mode Logic
-if 'dark_mode' not in st.session_state:
-    st.session_state.dark_mode = False
-
-if st.session_state.dark_mode:
-    st.markdown("""
-        <style>
-            :root {
-                --theme-bg-base: #121212;
-                --theme-bg-secondary: #1E1E1E;
-                --theme-text-primary: #FFFFFF;
-                --theme-text-secondary: #B3B3B3;
-                --theme-border: #333333;
-                --theme-card-bg: #242424;
-            }
-            body, .stApp { background-color: var(--theme-bg-base); color: var(--theme-text-primary); }
-            .css-1d391kg, .stSidebar { background-color: var(--theme-bg-secondary); }
-            h1, h2, h3, h4, h5, h6, p, span, div { color: var(--theme-text-primary) !important; }
-            .stTextInput>div>div>input, .stTextArea>div>textarea, .stSelectbox>div>div>div { 
-                background-color: var(--theme-card-bg) !important; 
-                color: var(--theme-text-primary) !important;
-                border-color: var(--theme-border) !important;
-            }
-            div[data-testid="stExpander"] { background-color: var(--theme-card-bg); border: 1px solid var(--theme-border); }
-        </style>
-    """, unsafe_allow_html=True)
-
 if 'user_id' not in st.session_state:
     st.session_state.user_id = None
 if 'username' not in st.session_state:
@@ -230,11 +203,6 @@ with st.sidebar:
     st.markdown("---")
     app_mode = st.radio("Navigation", ["Dashboard", "Agents", "Tasks", "Crews", "Pending Actions", "Memory Vault", "Execution History", "Settings"])
     st.markdown("---")
-    
-    if st.button("Toggle Dark Mode 🌙" if not st.session_state.dark_mode else "Toggle Light Mode ☀️"):
-        st.session_state.dark_mode = not st.session_state.dark_mode
-        st.rerun()
-
 if app_mode == "Dashboard":
     st.title("Control Center")
     st.markdown("Welcome to **Morshed Squad**. Select a module from the sidebar to begin.")

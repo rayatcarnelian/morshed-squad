@@ -1,111 +1,47 @@
-:root {
-    --bg-color: #FAFAFA;
-    --sidebar-bg: #F0F2F6;
-    --text-color: #31333F;
-    --header-color: #000000;
-    --brand-red: #FF4B4B;
-    --brand-hover: #FF3333;
-    --card-bg: #FFFFFF;
-    --border-color: #E0E0E0;
-    --metric-label: #666;
-    --input-bg: #FFFFFF;
-}
+/* =========================================================
+   Morshed Squad - Core Stylings
+========================================================= */
+/* Only styling Buttons and Layouts. Color themes are handled natively by Streamlit. */
 
-[data-theme="dark"] {
-    --bg-color: #0E1117;
-    --sidebar-bg: #262730;
-    --text-color: #FAFAFA;
-    --header-color: #FFFFFF;
-    --brand-red: #FF4B4B;
-    --brand-hover: #FF3333;
-    --card-bg: #1E1E1E;
-    --border-color: #333333;
-    --metric-label: #AAA;
-    --input-bg: #262730;
-}
-
-/* Main Background and Text Color */
-[data-testid="stAppViewContainer"] {
-    background-color: var(--bg-color);
-    color: var(--text-color);
-}
-
-/* Sidebar Styling */
-[data-testid="stSidebar"] {
-    background-color: var(--sidebar-bg);
-    border-right: 1px solid var(--border-color);
-}
-
-[data-testid="stSidebar"] h2 {
-    color: var(--brand-red);
-    font-weight: 700;
-}
-
-/* Titles and Headers */
-h1,
-h2,
-h3 {
-    font-family: 'Roboto', 'Helvetica Neue', sans-serif;
-    color: var(--header-color);
-    font-weight: 600;
-}
-
-/* Buttons */
+/* Primary Buttons */
 .stButton>button {
-    background-color: var(--brand-red);
-    color: white;
+    background-color: #FF4B4B !important;
+    color: white !important;
     border: none;
     border-radius: 4px;
     font-weight: 500;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s, color 0.2s;
 }
 
 .stButton>button:hover {
-    background-color: var(--brand-hover);
-    border-color: var(--brand-hover);
-    color: white;
+    background-color: #FF3333 !important;
+    color: white !important;
 }
 
 /* Secondary Buttons (Outlined) */
 button[kind="secondary"] {
-    background-color: transparent;
-    border: 1px solid var(--brand-red);
-    color: var(--brand-red);
+    background-color: transparent !important;
+    border: 1px solid #FF4B4B !important;
+    color: #FF4B4B !important;
 }
 
-/* Metrics and Cards */
+/* Metrics */
 [data-testid="stMetric"] {
-    background-color: var(--card-bg);
     padding: 15px;
     border-radius: 8px;
-    border: 1px solid var(--border-color);
+    border: 1px solid rgba(128, 128, 128, 0.2);
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-[data-testid="stMetricLabel"] {
-    color: var(--metric-label);
-    font-size: 0.9rem;
-}
-
-[data-testid="stMetricValue"] {
-    color: var(--text-color);
-    font-weight: 700;
-}
-
-/* Dataframe/Table Styling */
+/* Dataframe/Table border */
 [data-testid="stDataFrame"] {
-    border: 1px solid var(--border-color);
     border-radius: 4px;
 }
 
-/* Inputs */
+/* Inputs Structure */
 .stTextInput>div>div>input,
 .stTextArea>div>div>textarea,
 .stSelectbox>div>div>div {
-    background-color: var(--input-bg) !important;
-    color: var(--text-color) !important;
-    border: 1px solid var(--border-color) !important;
     border-radius: 4px;
 }
 
