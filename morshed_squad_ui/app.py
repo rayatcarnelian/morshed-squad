@@ -1,6 +1,21 @@
-import streamlit as st
 import os
 import sys
+
+# --- STREAMLIT CLOUD FIX: SQLite3 override for ChromaDB ---
+# Streamlit Cloud's default sqlite3 is too old for chromadb, causing immediate crashes.
+try:
+    __import__('pysqlite3')
+    import sys
+    sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+except ImportError:
+    pass # If running locally on a modern system, normal sqlite3 is fine.
+
+# --- STREAMLIT CLOUD FIX: Disable Telemetry ---
+# CrewAI telemetry tries to register signals, which crashes inside Streamlit's thread model.
+os.environ["CREWAI_TELEMETRY_OPTOUT"] = "true"
+os.environ["OTEL_SDK_DISABLED"] = "true"
+
+import streamlit as st
 import time
 import pandas as pd
 from dotenv import load_dotenv
