@@ -129,3 +129,71 @@ button[kind="secondary"] {
     border-left: 5px solid var(--brand-red);
     margin-bottom: 20px;
 }
+
+/* -----------------------------------------
+   📱 MOBILE RESPONSIVE OVERRIDES
+----------------------------------------- */
+@media screen and (max-width: 768px) {
+
+    /* 1. Remove excessive padding from the main Streamlit container */
+    .block-container,
+    [data-testid="stAppViewBlockContainer"] {
+        padding-top: 2rem !important;
+        padding-left: 1rem !important;
+        padding-right: 1rem !important;
+        padding-bottom: 3rem !important;
+        max-width: 100% !important;
+    }
+
+    /* 2. Prevent iOS/Android auto-zoom by forcing inputs to 16px min */
+    .stTextInput>div>div>input,
+    .stTextArea>div>div>textarea,
+    .stSelectbox>div>div>div {
+        font-size: 16px !important;
+        padding: 12px 10px !important;
+    }
+
+    /* 3. Make buttons large, tap-friendly, and full width */
+    .stButton>button,
+    .stDownloadButton>button {
+        width: 100% !important;
+        font-size: 16px !important;
+        padding: 0.8rem !important;
+        margin-top: 5px !important;
+    }
+
+    /* 4. Increase base font sizes for readability */
+    p,
+    li,
+    span,
+    .stMarkdown p {
+        font-size: 16px !important;
+        line-height: 1.5 !important;
+    }
+
+    h1 {
+        font-size: 26px !important;
+    }
+
+    h2 {
+        font-size: 22px !important;
+    }
+
+    h3 {
+        font-size: 18px !important;
+    }
+
+    /* 5. Prevent Sidebar from taking the entire screen when open */
+    [data-testid="stSidebar"] {
+        width: 85vw !important;
+        max-width: 320px !important;
+    }
+
+    /* 6. Fix Dataframes and Tables from overflowing horizontally */
+    [data-testid="stDataFrame"],
+    table {
+        display: block !important;
+        overflow-x: auto !important;
+        white-space: nowrap !important;
+    }
+}
