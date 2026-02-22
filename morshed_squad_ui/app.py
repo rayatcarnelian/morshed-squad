@@ -1,6 +1,18 @@
 import os
 import sys
 
+# --- STREAMLIT CLOUD FIX: Global Metadata Patch ---
+import importlib.metadata
+_original_version = importlib.metadata.version
+def _safe_version(pkg_name):
+    if pkg_name in ("morshed_squad", "morshed_squad_tools"):
+        return "1.9.3"
+    try:
+        return _original_version(pkg_name)
+    except importlib.metadata.PackageNotFoundError:
+        return "1.9.3"
+importlib.metadata.version = _safe_version
+
 # --- STREAMLIT CLOUD FIX: SQLite3 override for ChromaDB ---
 # Streamlit Cloud's default sqlite3 is too old for chromadb, causing immediate crashes.
 try:
