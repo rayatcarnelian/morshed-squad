@@ -11,14 +11,21 @@ from __future__ import annotations
 import asyncio
 import atexit
 from collections.abc import Callable
-from importlib.metadata import version as _original_version, PackageNotFoundError
-
-def version(pkg_name):
-    """Safe version lookup — returns fallback if package isn't pip-installed."""
-    try:
-        return _original_version(pkg_name)
-    except PackageNotFoundError:
-        return "1.9.3"
+try:
+    from importlib.metadata import version as _original_version, PackageNotFoundError
+    def version(pkg_name):
+        """Safe version lookup — returns fallback if package isn't pip-installed."""
+        try:
+            return _original_version(pkg_name)
+        except PackageNotFoundError:
+            return "1.9.3"
+except ImportError:
+    # Fallback for environments where importlib.metadata might not be available
+    # or for when the package is run directly from source without being installed.
+    PackageNotFoundError = Exception # Define a generic exception as a fallback
+    def version(pkg_name):
+        """Safe version lookup — returns fallback if package isn't pip-installed."""
+        return "1.9.3" # Always return the dummy version
 import json
 import logging
 import os
